@@ -1,18 +1,20 @@
 language: shell
-
-# We use Docker → we need sudo.
 sudo: required
-
 services:
-  - docker
-
+- docker
 script:
-  - ci/build.sh
+- ci/build.sh
+
+language: shell
+
 
 deploy:
-  - provider: script
-    script: PUBLISH=true ci/build.sh
-    skip_cleanup: true
-
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: V5Q9+ZYcC+FRNx0zuOi4IWVDZPdmIkacwRqxUJnbhkeBHjBCM9L1hknBPiq9X/8slY0GxFeb+cX/ZnJbha3TsHcU7MnjYP5UdUS73rbwf8I7k/LFQASz4/Emc+EO3b4BClLjmNkNiSvnaSMyC3CjlmrXaj3sHcLyie1/TAXwuMSWyvt0HhUtVpYGPp7Y3YDlM9fKttQ4VWqVKHAnoaBOzU4gl9kjGhsLKjHxPBEnUuJeQUSyw4UVnKXNKLAe8ccK1yLeWDUg8+XP4DeytVje0XFKOyU5iQJFGP+ollfT/Ah8I9G/1Xi+bg5I2WsmfzHHUK70S2eBIoyo3uTaBsSWESq5xBxwRCGzeD+cstPHVqzpNKbDnybTpLgQ/xy7hmWa+t3SqwrMvBC3MrLc58ABQZtPsXneZPvkAh8G71oVI88uI2ImC2nvfUVEDN9qgn5SHmuLJP7sSqNiGyhHEt4IX9Gfxh2DDYA8ssjnyEc2EDXX/Hw2nqkknblvRUnLu5ll0MxLerwjLbgEAuhSUAC/Q3/6yqIE4v3xlis3/eGt97q8U0Gpv1LcK+pFBvVnJ9zCFJD2QBsgUj6ZEqlGraAM0pwBRGaKZwmi4qqB6Asi+gj/A+gUBzZvApy5TSuvnf0TJ81le3vl9yTFH6if0h2OES1Zp0frDXjg0MBwB9Gj0R0=
+  file: "*.zip"
+  on:
+    repo: dailypush/composer
 notifications:
   email: false
